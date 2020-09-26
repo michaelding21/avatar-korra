@@ -1,0 +1,54 @@
+/*
+#2F4858 – charcoal
+#33658A – queen blue
+#86BBD8 – dark sky blue
+#F6AE2D – honey yellow
+#E2A3C7 – kobi pink
+*/
+
+body {
+  background-color: #86BBD8;
+}
+header {
+  color: #F6AE2D;
+  font-size: 40px;
+}
+th {
+  font-size: 23px;
+  color: #2F4858;
+}
+tr{
+  color: #E2A3C7;
+}
+.main{
+  font-style: italic;
+}
+*{
+  font-family: sans-serif;
+}
+td {
+  font-size: 18px;
+  width: 400px;
+}
+img {
+  width: 330px;
+  border: 30px;
+  border-style: dashed double dashed;
+  border-color: #F6AE2D;
+  padding: 25px;
+  margin: 15px;
+}
+
+iframe{
+  width: 330px;
+  border: 30px;
+  border-style: double dashed double;
+  border-color: #E2A3C7;
+  padding: 25px;
+  margin: 15px;
+}
+
+p{
+  color: #2F4858;
+  font-size: 14px;
+}
