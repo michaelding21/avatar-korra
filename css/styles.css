@@ -6,10 +6,12 @@
 #E2A3C7 – kobi pink
 */
 
+*{ /* universal */
+  font-family: Alegreya SC;
+}
 body {
   background-color: #86BBD8;
 }
-
 header {
   color: #F6AE2D;
   font-size: 40px;
@@ -21,17 +23,14 @@ th {
 tr{
   color: #E2A3C7;
 }
-.main{
+.main{ /* the headers of the table are italicilized*/
   font-style: italic;
-}
-*{
-  font-family: Alegreya SC;
 }
 td {
   font-size: 18px;
   width: 400px;
 }
-img {
+img { /*adding border, padding, other adjustments to image*/
   width: 330px;
   height: 300px;
   filter: contrast(150%);
@@ -41,8 +40,7 @@ img {
   padding: 25px;
   margin: 15px;
 }
-
-iframe{
+iframe{ /*adding border, padding, other adjustments to video*/
   width: 330px;
   border: 30px;
   border-style: double dashed double;
@@ -50,8 +48,7 @@ iframe{
   padding: 25px;
   margin: 15px;
 }
-
-p{
+p{ /*captions*/
   color: #2F4858;
   font-size: 14px;
 }
