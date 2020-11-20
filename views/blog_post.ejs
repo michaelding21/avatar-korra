@@ -1,0 +1,36 @@
+<%- include('global/header', {title: data.title}); %>
+<%- include('global/navbar', {posts: data2}); %>
+  <div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= data.title %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h4> By <%= data.user %></h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h5><%= data.date %></h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p><%= data.content %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p><%= data.content2 %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h5><%= data.tags %></h5>
+    </div>
+  </div>
+</div>
+
+<%- include('global/footer'); %>
