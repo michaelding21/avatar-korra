@@ -8,27 +8,41 @@
   font-family: 'Literata';
   font-style: normal;
   font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/literata/v17/or3PQ6P12-iJxAIgLa78DkrbXsDgk0oVDaDPYLanFLHpPf2TbBG_F_Y.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/literata/v18/or3PQ6P12-iJxAIgLa78DkrbXsDgk0oVDaDPYLanFLHpPf2TbBG_F_Y.ttf) format('truetype');
 }
 div {
   background-color: #87CEEB;
 }
-header,
+div.collapse {
+  background-color: #FFB6C1;
+}
+header {
+  color: #E75480;
+  font-size: 40px;
+  position: relative;
+  left: 50px;
+}
 h1 {
   color: #2F4858;
-  font-size: 40px;
+}
+h2.media {
+  position: relative;
+  left: 500px;
+}
+h2.posts {
+  position: relative;
+  left: 450px;
+}
+img.elements {
+  background-color: #87CEEB;
+  position: relative;
+  left: 100px;
+}
+audio {
+  position: relative;
+  top: 5px;
 }
 /*
-img.special {
-  background-color: @avatar-blue;
-  position: relative;
-  left: 350px;
-}
-
-audio{
-  position: relative;
-  left: 350px;
-}
 iframe{ //adding border, padding, other adjustments to video
   width: 330px;
   border: 10px;
