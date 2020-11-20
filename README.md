@@ -1,3 +1,12 @@
 # Avatar-and-Korra
-title: Welcome to Michael Ding's homepage!
-Is Legends of Korra not only overhated, but even better than the original? Where are the sequel's shortcomings, and what are its strengths?
+Welcome to Michael Ding's page about Avatar and Korra!
+
+After downloading the files, please follow these steps:
+
+1. use "cd" in terminal to access the project folder
+2. enter into terminal: npm install fs --save
+3. enter into terminal: npm install ejs --save
+4. enter into terminal: npm install less --save
+5. enter into terminal: ./node_modules/less/bin/lessc ./LESS/styles.less ./build/css/styles.css
+6. enter into terminal: node blogCreator.js
+7. refresh or open index.html in Google Chrome
