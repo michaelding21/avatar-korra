@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Blog</title>
+  <meta name="author" content="You">
+  <meta name="description" content="the blog">
+  <meta content="text/html" http-equiv="Content-type" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+</head>
+
+<body>
+  <header>
+    <h1>Blog!</h1>
+  </header>
+  <section id="blog-table">
+    <table>
+      <tr>
+        <th>User</th>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Content</th>
+        <th>Tags</th>
+      </tr>
+      <% for(let i=1; i<data.length; i++){ %>
+      <tr>
+        <td><%= data[i].user %></td>
+        <td><%= data[i].title %></td>
+        <td><%= data[i].date %></td>
+        <td><%= data[i].content %></td>
+        <td><%= data[i].tags %></td>
+        <td>
+          <% if (data[i].skills.length > 0){ %>
+          <ol>
+            <% data[i].skills.forEach(function(val){%>
+            <li> <%=val%></li>
+            <%}) %>
+          </ol>
+          <%}%>
+        </td>
+      </tr>
+      <%}%>
+    </table>
+  </section>
+  <footer>
+  </footer>
+</body>
+
+</html>
