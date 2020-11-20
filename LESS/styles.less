@@ -1,9 +1,10 @@
 @avatar-blue: #87CEEB;
 @light-pink: #FFB6C1;
 @charcoal: #2F4858;
-@queen-blue: #33658A;
+@dark-blue: darken(@avatar-blue,50%);
 @honey-yellow: #F6AE2D;
 @jade: #00A86B;
+@light-green: lighten(@jade, 30%);
 @dark-pink: #E75480;
 @crimson: #990000;
 
@@ -27,7 +28,7 @@ footer{
   background-color: @crimson;
   color:@light-pink;
   position: relative;
-  left:15px;
+  left:10px;
 }
 h1{
   color: @charcoal;
@@ -39,6 +40,10 @@ h2.media{
 h2.posts{
   position: relative;
   left: 450px;
+}
+#blog, #emailHelp {
+  background-color: @dark-blue;
+  color: @light-green;
 }
 .gallery{
   position: relative;

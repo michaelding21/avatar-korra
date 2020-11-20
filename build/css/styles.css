@@ -18,7 +18,7 @@ footer {
   background-color: #990000;
   color: #FFB6C1;
   position: relative;
-  left: 15px;
+  left: 10px;
 }
 h1 {
   color: #2F4858;
@@ -30,6 +30,11 @@ h2.media {
 h2.posts {
   position: relative;
   left: 450px;
+}
+#blog,
+#emailHelp {
+  background-color: #104b63;
+  color: #42ffba;
 }
 .gallery {
   position: relative;
