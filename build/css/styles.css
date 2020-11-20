@@ -1,20 +1,12 @@
-@font-face {
-  font-family: 'Crimson Pro';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/crimsonpro/v13/q5uUsoa5M_tv7IihmnkabC5XiXCAlXGks1WZzm18OA.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Literata';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/literata/v18/or3PQ6P12-iJxAIgLa78DkrbXsDgk0oVDaDPYLanFLHpPf2TbBG_F_Y.ttf) format('truetype');
-}
 div {
   background-color: #87CEEB;
 }
 div.collapse {
   background-color: #FFB6C1;
+}
+div.carousel {
+  position: relative;
+  left: 400px;
 }
 header {
   color: #E75480;
@@ -22,16 +14,26 @@ header {
   position: relative;
   left: 50px;
 }
+footer {
+  background-color: #990000;
+  color: #FFB6C1;
+  position: relative;
+  left: 15px;
+}
 h1 {
   color: #2F4858;
 }
 h2.media {
   position: relative;
-  left: 500px;
+  left: 510px;
 }
 h2.posts {
   position: relative;
   left: 450px;
+}
+.gallery {
+  position: relative;
+  left: 375px;
 }
 img.elements {
   background-color: #87CEEB;
