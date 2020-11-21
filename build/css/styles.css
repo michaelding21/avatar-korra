@@ -1,12 +1,25 @@
 div {
   background-color: #87CEEB;
 }
+.bordered {
+  border-style: double dashed double;
+  border-color: #2F4858;
+  border-width: thick;
+}
+#media {
+  border-style: double dashed double;
+  border-color: #2F4858;
+  border-width: thick;
+}
 div.collapse {
   background-color: #FFB6C1;
 }
 div.carousel {
   position: relative;
   left: 400px;
+  border-style: double dashed double;
+  border-color: #2F4858;
+  border-width: thick;
 }
 header {
   color: #E75480;
@@ -48,16 +61,7 @@ img.elements {
 audio {
   position: relative;
   top: 5px;
-}
-/*
-iframe{ //adding border, padding, other adjustments to video
-  width: 330px;
-  border: 10px;
-  position: relative;
-  left: 350px;
   border-style: double dashed double;
-  border-color: @charcoal;
-  padding: 10px;
-  margin: 10px;
+  border-color: #2F4858;
+  border-width: thick;
 }
-*/
