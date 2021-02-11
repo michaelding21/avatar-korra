@@ -1,0 +1,50 @@
+{
+  "mario@gmail.com":{
+    "name": "Mario",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/a/a9/MarioNSMBUDeluxe.png",
+    "wins": 20,
+    "losses": 10
+  },
+  "luigi@gmail.com":{
+    "name": "Luigi",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/7/73/Luigi_NSMBUDX.png",
+    "wins": 10,
+    "losses": 5
+  },
+  "toad@gmail.com":{
+    "name": "Toad",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/d/d1/Toad_3D_Land.png",
+    "wins": 1,
+    "losses": 5
+  },
+  "peach@gmail.com":{
+    "name": "Peach",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/d/d5/Peach_%28Super_Mario_3D_World%29.png",
+    "wins": 20,
+    "losses": 5
+  },
+  "bowser@gmail.com":{
+    "name": "Bowser",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/1/11/BowserNSMBUD.png",
+    "wins": 100,
+    "losses": 4
+  },
+  "yoshi@gmail.com":{
+    "name": "Yoshi",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/d/db/Yoshi_%28Nintendo_character%29.png",
+    "wins": 10,
+    "losses": 7
+  },
+  "birdo@gmail.com":{
+    "name": "Birdo",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/f/f9/Birdo-MP9.png",
+    "wins": 11,
+    "losses": 5
+  },
+  "koopa@gmail.com":{
+    "name": "Koopa",
+    "photo":"https://upload.wikimedia.org/wikipedia/en/b/b2/Koopa_Troopa_NSMBU.png",
+    "wins": 1,
+    "losses": 2
+  }
+}

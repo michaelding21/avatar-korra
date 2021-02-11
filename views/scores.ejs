@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EJS Express Demo</title>
+<link rel="icon" type="image/png" href="images/logo.png"/>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%-include('global/navbar')-%>
+<h1>High Scores</h1>
+<table>
+<tr>
+  <th>
+    User
+  </th>
+  <th>
+    Wins
+  </th>
+  <th>
+    Losses
+  </th>
+  <th>
+    Win %
+  </th>
+</tr>
+<%for(let i =0; i<users.length; i++){%>
+  <th>
+    <%=users[i].name%>
+  </th>
+  <th>
+    <%=users[i].wins%>
+  </th>
+  <th>
+    <%=users[i].losses%>
+  </th>
+  <th>
+    <%=users[i].win_percent%>
+  </th>
+</tr>
+<%}%>
+</table>
+<script src="/js/scripts.js"></script>
+</body>
+</html>
