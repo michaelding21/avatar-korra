@@ -1,13 +1,5 @@
-<!--
-Michael Ding Interest page, about.ejs
-Avatar and Korra: Is the Sequel Overrated?
-Topics – Computer Science
-Mr. Gohde
-November 20, 2020
--->
-
-<%- include('global/header', {title: "About Me"}); %>
-<%- include('global/navbar', {posts: data}); %>
+<%- include('partials/header', {title: "About Me"}); %>
+<%- include('partials/navbar', {posts: data}); %>
 <div class="container">
   <div class="row">
     <main>I really enjoyed rewatching Avatar: The Last Airbender last summer, and ever since I've taken a pretty significant interest in the show.
@@ -33,4 +25,4 @@ November 20, 2020
     <img src="images/aang_zko.jpg">
   </div>
 </div>
-<%- include ('global/footer'); %>
+<%- include ('partials/footer'); %>

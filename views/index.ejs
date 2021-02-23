@@ -1,13 +1,5 @@
-<!--
-Michael Ding Interest page, index.ejs
-Avatar and Korra: Is the Sequel Overrated?
-Topics – Computer Science
-Mr. Gohde
-November 20, 2020
--->
-
-<%- include('global/header', {title: "Home"}); %>
-<%- include('global/navbar', {posts: data}); %>
+<%- include('partials/header', {title: "Home"}); %>
+<%- include('partials/navbar', {posts: data}); %>
 
 <div class="container">
 
@@ -49,21 +41,6 @@ November 20, 2020
   <div class="row">
     <h2 class="posts"> Blog Posts! </h2>
   </div>
-  <div class="row">
-    <% data.forEach(function(post){%>
-    <div class="col">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src=<%=post.image%> style="width:300px;height:350px;" alt="Card image cap">
-        <% let filename = post.title.replace(/ /g, "_"); %>
-        <div class="card-body">
-          <h5 class="card-title"><%=post.title%></h5>
-          <p class="card-text"><%=post.descrip%></p>
-          <a href="<%=filename%>.html" class="btn btn-primary">Post</a>
-        </div>
-      </div>
-    </div>
-    <%})%>
-  </div>
   <br>
 <div class="row">
   <h4 class="gallery"> Gallery: Avatar Graphic Novels! </h4>
@@ -99,4 +76,4 @@ November 20, 2020
 </div>
 <br><br><br>
 
-<%- include ('global/footer'); %>
+<%- include ('partials/footer'); %>

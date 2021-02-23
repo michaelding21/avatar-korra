@@ -18,146 +18,143 @@ app.set('view engine', 'ejs');
 
 app.get('/', function(request, response) {
   response.status(200);
-  response.setHeader('Content-Type', 'text/html')
-  response.render("index");
+  response.setHeader('Content-Type', 'text/html');
+  let blog_content = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
+  let entry = blog_content;
+  let blogTitle = [];
+  for(title in entry){
+    blogTitle.push(title);
+  }
+  response.render("index", {
+    data: blogTitle
+  });
 });
 
 app.get('/about', function(request, response) {
-  let users = JSON.parse(fs.readFileSync('data/users.json'));
-  let names = [];
-  for(username in users){
-    names.push(users[username].name);
-  }
   response.status(200);
-  response.setHeader('Content-Type', 'text/html')
+  response.setHeader('Content-Type', 'text/html');
+  let blog_content = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
+  let blogTitle = [];
+  for(title in blog_content){
+    blogTitle.push(title);
+  }
   response.render("about",{
-    names: names
+    data: blogTitle
   });
 });
 
-app.get('/scores', function(request, response) {
-  let users = JSON.parse(fs.readFileSync('data/users.json'));
-  let sortedUsers = [];
-  for(username in users){
-    let user = users[username];
-    user.username= username;
-    user.win_percent = (user.wins/parseFloat(user.wins+user.losses) * 100).toFixed(2);
-    if(user.win_percent=="NaN")user.win_percent=0;
-    sortedUsers.push(user);
+app.get('/blogCreate', function(request, response) {
+    let blogs = JSON.parse(fs.readFileSync('data/content.json'));
+    let arr = ["Damus","Mr. Gohde","Gooboy","Woash","Avatar","Aang","Katara"];
+    let blogTitle = [];
+    for(title in blogs){
+      blogTitle.push(title);
+    }
+    response.status(200);
+    response.setHeader('Content-Type', 'text/html');
+    response.render("blog/blogCreate", {
+      authors: arr,
+      data: blogTitle
+    });
+});
+
+app.get('/blog/:blogPost', function(request, response) {
+  let blogs = JSON.parse(fs.readFileSync('data/content.json'));
+  let arr = ["Damus","Mr. Gohde","Gooboy","Woash","Avatar","Aang","Katara"];
+  let blogTitle = [];
+  for(title in blogs){
+    blogTitle.push(title);
   }
-  sortedUsers.sort(function(a, b){
-    return parseFloat(b.win_percent)-parseFloat(a.win_percent);
-  })
-
-  response.status(200);
-  response.setHeader('Content-Type', 'text/html')
-  response.render("scores",{
-    users: sortedUsers
-  });
-});
-
-app.get('/user/:username', function(request, response) {
-  let users = JSON.parse(fs.readFileSync('data/users.json'));
-  let username = request.params.username;
-
-  if(users[username]){
-    let user = users[username];
-    user.username= username;
-    user.win_percent = (user.wins/parseFloat(user.wins+user.losses) * 100).toFixed(2);
-    if(user.win_percent=="NaN")user.win_percent=0;
-
+  let blogPost = request.params.blogPost;
+  if(blogs[blogPost.split('_').join(' ')]){
+    console.log("test");
     response.status(200);
     response.setHeader('Content-Type', 'text/html')
-    response.render("user/userDetails",{
-      user: user
+    response.render("blog_post",{
+      data: blogs[blogPost.split('_').join(' ')],
+      data2: blogTitle,
+      authors: arr
     });
-
-  }else{
+  } else{
     response.status(404);
     response.setHeader('Content-Type', 'text/html')
     response.render("error", {
-      "errorCode":"404"
+      "errorCode": 404,
+      data: blogTitle
     });
-  }
-});
+  }});
 
-app.get('/userCreate', function(request, response) {
-    response.status(200);
-    response.setHeader('Content-Type', 'text/html')
-    response.render("user/userCreate");
-});
-
-app.get('/user', function(request, response) {
-    let name = request.query.name;
-    let email ="";
-
-    let users = JSON.parse(fs.readFileSync('data/users.json'));
-    for(username in users){
-      let user = users[username];
-      if(name==user.name){
-        email=username;
-        break;
-      }
-    }
-    if(email){
-      response.redirect("/user/"+email);
-    }else{
-      response.status(404);
-      response.setHeader('Content-Type', 'text/html')
-      response.render("error", {
-        "errorCode":"404"
-      });
-    }
-});
-
-app.post('/user', function(request, response) {
-    let users = JSON.parse(fs.readFileSync('data/users.json'));
-
+app.post('/blog', function(request, response) {
+    let blogs = JSON.parse(fs.readFileSync('data/content.json'));
+    let date = new Date().toLocaleString();
+    var tags = request.body.tags.split(" ");
     var u = {
-        name: request.body.name.trim(),
-        photo: request.body.photo_link.trim(),
-        wins: 0,
-        losses: 0
+        user: request.body.author.trim(),
+        title: request.body.title.trim(),
+        date: date,
+        tags: tags,
+        content: request.body.content.trim(),
+        descrip: request.body.descrip.trim()
     };
-
-    users[request.body.email.trim()]=u;
-    fs.writeFileSync('data/users.json', JSON.stringify(users));
+    blogs[request.body.title.trim()]=u;
+    fs.writeFileSync('data/content.json', JSON.stringify(blogs));
 
     response.redirect("/");
 
 });
 
-app.post('/user/wink/:username', function(request, response) {
-  let users = JSON.parse(fs.readFileSync('data/users.json'));
-  let username = request.params.username;
+app.post('/blog/comments/:blogPost', function(request, response) {
+  let blogs = JSON.parse(fs.readFileSync('data/content.json'));
+  let arr = [];
+  let date = new Date().toLocaleString();
+  console.log("test date + " + date);
+  if(blogs[request.params.blogPost].comments)arr = blogs[request.params.blogPost].comments
+    var u = {
+        user: request.body.user2,
+        content: request.body.content2,
+        date: date
+    };
+    arr.push(u);
+    blogs[request.params.blogPost].comments=arr;
+    console.log("before write");
+    fs.writeFileSync('data/content.json', JSON.stringify(blogs));
+});
 
-  if(users[username]){
-    if (!users[username].winks) users[username].winks = 0;
-    users[username].winks++;
-    fs.writeFileSync('data/users.json', JSON.stringify(users));
+app.post('/blog/like/:blogPost', function(request, response) {
+  let blogs = JSON.parse(fs.readFileSync('data/content.json'));
+  let blogPost = request.params.blogPost;
+  if(blogs[blogPost]){
+    if (!blogs[blogPost].comments[request.body.c].likes) blogs[blogPost].comments[request.body.c].likes = 0;
+    blogs[blogPost].comments[request.body.c].likes++;
+    fs.writeFileSync('data/content.json', JSON.stringify(blogs));
 
     response.status(200);
     response.setHeader('Content-Type', 'text/json');
-    response.send(users[username]);
+    response.send(blogs[blogPost]);
   }else{
     response.status(404);
     response.setHeader('Content-Type', 'text/json');
     response.send('{results: "no user"}');
   }
-
 });
 
 // Because routes/middleware are applied in order, this will act as a default error route in case of an invalid route
 app.use("", function(request, response){
   response.status(404);
-  response.setHeader('Content-Type', 'text/html')
+  response.setHeader('Content-Type', 'text/html');
+  let blogs = JSON.parse(fs.readFileSync('data/content.json', 'utf8'));
+  let blogTitle = [];
+  for(title in blogs){
+    blogTitle.push(title);
+  }
   response.render("error", {
-    "errorCode":"404"
+    "errorCode":404,
+    data: blogTitle
   });
 });
 
 //..............Start the server...............................//
-const port = process.env.PORT || 3000; // heroku uses process.env.PORT to give your site a port, the 3000 is our backup option locally
+const port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log('Easy server listening for requests on port ' + port + '!');
   console.log('Visit http://localhost:'+port+' to see the website.')

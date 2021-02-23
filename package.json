@@ -6,6 +6,7 @@
   "dependencies": {
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
     "less": "^3.12.2"
   },
   "devDependencies": {},
@@ -16,7 +17,7 @@
     "type": "git",
     "url": "git+https://github.com/michaelding21/avatarkorra.git"
   },
-  "engines":{
+  "engines": {
     "node": "12.x"
   },
   "author": "",
