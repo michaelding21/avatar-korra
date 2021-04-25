@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<%- include('../partials/header'); %>
+<%-include('../partials/navbar', {posts:blog} )-%>
+
+<h1>Create User</h1>
+
+<form action="/users" method="post">
+
+
+   <label for="id">enter a five digit ID #:</label><br>
+   <input type="text" id="id" name="id" required><br>
+
+   <label for="name">Name:</label><br>
+   <input type="text" id="name" name="name" required><br>
+
+	 <label for="bio">Bio:</label><br>
+   <textarea type="text" id="bio" name="bio" required></textarea><br>
+    <input type="submit" value="Submit">
+</form>
+<%- include('../partials/footer'); %>

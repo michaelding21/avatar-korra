@@ -1,0 +1,33 @@
+<%- include('../partials/header', {title: blog.title}); %>
+<%- include('../partials/navbar', {posts: blog}); %>
+<div class="container" id="blog">
+  <div class="row" id="blog">
+    <div class="col" id="blog">
+      <h1 id="blog"><%= blog.title %></h1>
+    </div>
+  </div>
+  <div class="row" id="blog">
+    <div class="col" id="blog">
+      <h4> By <%= blog.name %></h4>
+    </div>
+  </div>
+  <div class="row" id="blog">
+    <div class="col" id="blog">
+      <h5><%= blog.Date %></h5>
+    </div>
+  </div>
+  <br>
+  <div class="row" id="blog">
+    <div class="col" id="blog">
+      <h5><%= blog.description %></h5>
+    </div>
+  </div>
+  <br>
+  <div class="row" id="blog">
+    <div class="col" id="blog">
+      <p><%= blog.text %></p>
+    </div>
+  </div>
+
+<script src="../js/blogdetails_scripts.js"></script>
+<%- include('../partials/footer'); %>

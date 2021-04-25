@@ -1,0 +1,20 @@
+<%-include('../partials/header', {page_title:"Edit Blog"})-%>
+<%-include('../partials/navbar', {posts:blog} )-%>
+
+
+<h1>The Blog</h1>
+<br>
+<h2>Update <%= blog.title %></h2>
+
+<form action="/blog/<%= blog.id%>?_method=PUT" method="POST">
+<ol>
+<% Object.keys(blog).forEach(function(key){ %>
+	<li><%=key%>: <input type="text" name="<%=key%>" value="<%= blog[key] %>">
+	</li>
+<% }); %>
+</ol>
+	<button>Update Blog</button>
+</form>
+
+
+<%-include('../partials/footer')-%>

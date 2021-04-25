@@ -12,19 +12,13 @@
       <li class="nav-item">
         <a class="nav-link" href="/about">About</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Blog Posts
-        </a>
-        <div class="dropdown-menu">
-          <% for(let i=0; i<posts.length; i++){%>
-          <a class="dropdown-item" href='/blog/<%=posts[i].split(' ').join('_')%>'><%=posts[i]%></a>
-        <%}%>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="/blogs"> Blogs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/blogCreate">Create Blog</a>
+        <a class="nav-link" href="/users">Users</a>
       </li>
+
     </ul>
 
   </div>
