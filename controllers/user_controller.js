@@ -90,13 +90,11 @@ router.get('/user/create', async function(req, res) {
     if (0 == 0) {
       //if(!err){
       //let blogResponse = JSON.parse(body);
-      let blogList = await Blog.getAllBlogs();
       let arr = ["Damus", "Mr. Gohde", "Gooboy", "Woash", "Avatar", "Aang", "Katara"];
 
       res.status(200);
       res.setHeader('Content-Type', 'text/html');
       res.render('user/new_user.ejs', {
-        blog: blogList,
         authors: arr
       })
     } else {
@@ -126,7 +124,7 @@ router.post('/users', async function(req, res) {
       "Blogs": req.body.Blogs
     }
     let newID = req.body.id;
-    User.updateUser(newID, newUser);
+    await User.updateUser(newID, newUser);
     res.redirect('/users');
   } catch (error) {
     let errorCode = 404;

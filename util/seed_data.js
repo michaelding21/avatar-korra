@@ -11,7 +11,7 @@ let blogs = JSON.parse(fs.readFileSync('./data/blog.json'));
 
 for (name in users) {
   let user = users[name];
-  let oneUser = db.collection('users').doc(user.name);
+  let oneUser = db.collection('users').doc(user.id);
   oneUser.set({
     id: user.id,
     name: user.name,

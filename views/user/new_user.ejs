@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%- include('../partials/header'); %>
-<%-include('../partials/navbar', {posts:blog} )-%>
+<%-include('../partials/navbar')-%>
 
 <h1>Create User</h1>
 
@@ -13,8 +13,17 @@
    <label for="name">Name:</label><br>
    <input type="text" id="name" name="name" required><br>
 
+   <label for="logins">Logins:</label><br>
+   <input type="text" id="logins" name="logins" required><br>
+
 	 <label for="bio">Bio:</label><br>
    <textarea type="text" id="bio" name="bio" required></textarea><br>
+
+    <label for="Blogs">Blogs:</label><br>
+    <input type="text" id="blogs" name="Blogs" required><br>
+
     <input type="submit" value="Submit">
+
+
 </form>
 <%- include('../partials/footer'); %>

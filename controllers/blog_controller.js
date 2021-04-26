@@ -118,7 +118,7 @@ router.post('/blogs', async function(req, res) {
       "Date": req.body.Date
     }
     let newID = (req.body.id);
-    Blog.updateBlog(newID, newBlog);
+    await Blog.updateBlog(newID, newBlog);
     res.redirect('/blogs');
   } catch (error) {
     let errorCode = 404;
