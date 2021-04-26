@@ -4,16 +4,11 @@ var db = admin.firestore();
 var fs = require('fs');
 
 exports.getAllBlogs = async function() {
-  var blogData = fs.readFileSync('data/blog.json', 'utf8');
-  return JSON.parse(blogData);
-/*
   let allBlogs = {};
-
   try {
     let blogs = await db.collection('blogs').get();
 
     for (blog of blogs.docs) {
-      console.log(blog.id);
       allBlogs[blog.id] = blog.data();
     };
 
@@ -21,21 +16,42 @@ exports.getAllBlogs = async function() {
   } catch (err) {
     console.log('Error getting documents', err);
   }
-*/
+
 }
 
 exports.getBlog = async function(id) {
-  var blogData = await exports.getAllBlogs();
+    try {
+      let allBlogs = await exports.getAllBlogs();
 
-  if (blogData[id]) return blogData[id];
-
-  return {};
+      if (allBlogs[id]) {
+        console.log(id)
+        return allBlogs[id];
+      }
+    } catch (err) {
+      console.log(err)
+    }
 }
 
 exports.saveBlog = async function(id, newBlog) {
-  var blogData = await exports.getAllBlogs();
-  blogData[id] = newBlog;
-  fs.writeFileSync('data/blog.json', JSON.stringify(blogData));
+  try {
+    let allBlogs = await exports.getAllBlogs();
+    allBlogs[id] = newBlog;
+    for (name in allBlogs) {
+      let blog = allBlogs[name];
+      let oneBlog = await db.collection('blogs').doc(blog.id);
+      oneBlog.set({
+        id: blog.id,
+        name: blog.name,
+        title: blog.title,
+        description: blog.description,
+        subtitle: blog.subtitle,
+        text: blog.text,
+        Date: blog.Date
+      });
+    }
+  } catch (err) {
+    console.log('Error getting documents', err);
+  }
 }
 
 exports.updateBlog = async function(id, blogData) {
@@ -43,7 +59,10 @@ exports.updateBlog = async function(id, blogData) {
 }
 
 exports.deleteBlog = async function(id) {
-  var blogData = await exports.getAllBlogs();
-  delete blogData[id];
-  fs.writeFileSync('data/blog.json', JSON.stringify(blogData));
+  try{
+    await db.collection('blogs').doc(id).delete();
+  }
+  catch (err){
+    console.log(err);
+  }
 }

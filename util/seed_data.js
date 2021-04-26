@@ -21,12 +21,12 @@ for (name in users) {
   });
 }
 
-for (title in blogs) {
-  let blog = blogs[title];
-  let oneBlog = db.collection('blogs').doc(blog.title);
+for (name in blogs) {
+  let blog = blogs[name];
+  let oneBlog = db.collection('blogs').doc(blog.id);
   oneBlog.set({
     id: blog.id,
-    contributorID: blog.contributorID,
+    name: blog.name,
     title: blog.title,
     description: blog.description,
     subtitle: blog.subtitle,

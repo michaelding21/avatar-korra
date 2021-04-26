@@ -109,8 +109,7 @@ router.post('/blogs', async function(req, res) {
     let blogResponse = await Blog.getAllBlogs();
     let newBlog = {
       "id": req.body.id,
-      "contributorID": req.body.contributorID,
-      "name": req.body.author,
+      "name": req.body.name,
       "title": req.body.title,
       "description": req.body.description,
       "subtitle": req.body.subtitle,
@@ -179,7 +178,6 @@ router.put('/blog/:id', async function(req, res) {
     let newBlogData = {};
     let id = req.body.id;
     newBlogData["id"] = req.body.id;
-    newBlogData["contributorID"] = req.body.contributorID;
     newBlogData["name"] = req.body.name;
     newBlogData["title"] = req.body.title;
     newBlogData["description"] = req.body.description;
