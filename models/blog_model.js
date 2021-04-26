@@ -1,14 +1,13 @@
+
 var fs = require('fs');
 
-//helper reading/writing functions that do the fs.read or fs.write stuff for you
-
-exports.getAllBlogs = function() {
+exports.getAllBlogs = async function() {
   var blogData = fs.readFileSync('data/blog.json', 'utf8');
   return JSON.parse(blogData);
 }
 
-exports.getBlog = function(id) {
-  var blogData = exports.getAllBlogs();
+exports.getBlog = async function(id) {
+  var blogData = await exports.getAllBlogs();
 
   if (blogData[id]) return blogData[id];
 

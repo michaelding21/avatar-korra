@@ -1,12 +1,18 @@
+var admin = require("firebase-admin");
+var serviceAccount = require("../config/firebase-config.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+var db = admin.firestore();
 var fs = require('fs');
 
-exports.getAllUsers = function() {
+exports.getAllUsers = async function() {
   var userData = fs.readFileSync('data/user.json', 'utf8');
   return JSON.parse(userData);
 }
 
-exports.getUser = function(id) {
-  var userData = exports.getAllUsers();
+exports.getUser = async function(id) {
+  var userData = await exports.getAllUsers();
 
   if (userData[id]) return userData[id];
 
