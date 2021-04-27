@@ -67,6 +67,46 @@ router.get('/about', async function(req, res) {
   }
 });
 
+router.get('/random', async function(req, res) {
+  fetch('https://last-airbender-api.herokuapp.com/api/v1/characters/random').then((resp) => resp.json()).then(async function(data) {
+    //send this data to a new ejs called randomCharacter or something, and then use the form to link to a new page with GET
+    res.status(200);
+    res.setHeader('Content-Type', 'text/html');
+    console.log(data);
+    res.render('random.ejs', {
+      character: data
+    });
+  }).catch(function(error) {
+    let errorCode = 404;
+    res.status(errorCode);
+    res.setHeader('Content-Type', 'text/html');
+    res.render("error.ejs", {
+      "errorCode": errorCode,
+    });
+  });
+
+});
+
+router.get('/avatars', async function(req, res) {
+  fetch('https://last-airbender-api.herokuapp.com/api/v1/characters/avatar').then((resp) => resp.json()).then(async function(data) {
+    //send this data to a new ejs called randomCharacter or something, and then use the form to link to a new page with GET
+    res.status(200);
+    res.setHeader('Content-Type', 'text/html');
+    console.log(data[0]);
+    res.render('avatars.ejs', {
+      avatars: data
+    });
+  }).catch(function(error) {
+    let errorCode = 404;
+    res.status(errorCode);
+    res.setHeader('Content-Type', 'text/html');
+    res.render("error.ejs", {
+      "errorCode": errorCode,
+    });
+  });
+
+});
+
 router.get('/blog/create', async function(req, res) {
   try {
     /*

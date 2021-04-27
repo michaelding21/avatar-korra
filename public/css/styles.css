@@ -45,11 +45,7 @@ h2.posts {
   left: 450px;
 }
 #blog,
-#emailHelp,
-#comments,
-#user_comment,
-#comment_button,
-#content_comment {
+#user {
   background-color: #104b63;
   color: #42ffba;
 }

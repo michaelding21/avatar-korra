@@ -1,0 +1,40 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar'); %>
+<div class="container">
+
+  <div class="row">
+    <h2>Get to know all of the Avatars!</h2>
+  </div>
+  <br>
+
+  <div class="row">
+  <% Object.keys(avatars).forEach(function(key){ %>
+  	<div class="col-md-4">
+    <div class="row">
+      <h1>Meet <%=avatars[key].name %>!</h1>
+    </div>
+    <div class="row">
+      <img src=<%=avatars[key].photoUrl%> alt="alternatetext">
+    </div>
+    <div class="row">
+      <h4>Basic info on the Avatar:</h4>
+    </div>
+    <div class="row">
+      <br>
+      <ul>
+        <li>Allies: <%=avatars[key].allies[0] %></li>
+        <li>Enemies: <%=avatars[key].enemies %></li>
+        <li>Element or Weapon: <%=avatars[key].weapon %></li>
+        <li>Gender: <%=avatars[key].gender %></li>
+        <li>Hair Color: <%=avatars[key].hair %></li>
+
+      </ul>
+    </div>
+
+  	</div>
+    <%})%>
+         </div>
+
+</div>
+
+<%- include ('partials/footer'); %>

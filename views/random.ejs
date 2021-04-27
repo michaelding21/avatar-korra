@@ -1,0 +1,37 @@
+<%- include('partials/header'); %>
+<%- include('partials/navbar'); %>
+<div class="container">
+  <div class="row">
+    <h2>Get to know an Avatar character!</h2>
+  </div>
+  <br>
+  <div class="row">
+    <h1>Meet <%=character[0].name %>!</h1>
+  </div>
+  <div class="row">
+    <img src=<%=character[0].photoUrl%> alt="alternatetext">
+  </div>
+  <div class="row">
+    <h4>Some basic information about the character:</h4>
+  </div>
+  <div class="row">
+    <br>
+    <ul>
+      <li>Allies: <%=character[0].allies[0] %></li>
+      <li>Enemies: <%=character[0].enemies %></li>
+      <li>Element or Weapon: <%=character[0].weapon %></li>
+      <li>Gender: <%=character[0].gender %></li>
+      <li>Hair Color: <%=character[0].hair %></li>
+
+    </ul>
+  </div>
+  <div class="row">
+    <h5> The character's profession is a <%= character[0].profession%>.
+  </div>
+  <div class="row">
+    <h5> You can refresh the page to see another random character! </h5>
+  </div>
+
+</div>
+
+<%- include ('partials/footer'); %>
