@@ -44,8 +44,7 @@ h2.posts {
   position: relative;
   left: 450px;
 }
-#blog,
-#user {
+#blog {
   background-color: #104b63;
   color: #42ffba;
 }

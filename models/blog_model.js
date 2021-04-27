@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 var admin = require("firebase-admin");
 var db = admin.firestore();
 
@@ -8,35 +10,34 @@ exports.getAllBlogs = async function() {
   try {
     let blogs = await db.collection('blogs').get();
 
-    for (blog of blogs.docs) {
+    for (var blog of blogs.docs) {
       allBlogs[blog.id] = blog.data();
-    };
+    }
 
     return allBlogs;
   } catch (err) {
     console.log('Error getting documents', err);
   }
 
-}
+};
 
 exports.getBlog = async function(id) {
     try {
       let allBlogs = await exports.getAllBlogs();
 
       if (allBlogs[id]) {
-        console.log(id)
         return allBlogs[id];
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-}
+};
 
 exports.saveBlog = async function(id, newBlog) {
   try {
     let allBlogs = await exports.getAllBlogs();
     allBlogs[id] = newBlog;
-    for (name in allBlogs) {
+    for (var name in allBlogs) {
       let blog = allBlogs[name];
       let oneBlog = await db.collection('blogs').doc(blog.id);
       oneBlog.set({
@@ -52,11 +53,11 @@ exports.saveBlog = async function(id, newBlog) {
   } catch (err) {
     console.log('Error getting documents', err);
   }
-}
+};
 
 exports.updateBlog = async function(id, blogData) {
-  await exports.saveBlog(id, blogData)
-}
+  await exports.saveBlog(id, blogData);
+};
 
 exports.deleteBlog = async function(id) {
   try{
@@ -65,4 +66,4 @@ exports.deleteBlog = async function(id) {
   catch (err){
     console.log(err);
   }
-}
+};

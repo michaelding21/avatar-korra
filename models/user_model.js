@@ -1,3 +1,5 @@
+/*jshint esversion: 8 */
+
 var admin = require("firebase-admin");
 var serviceAccount = require("../config/firebase-config.json");
 admin.initializeApp({
@@ -10,14 +12,14 @@ exports.getAllUsers = async function() {
   let allUsers = {};
   try {
     let users = await db.collection('users').get();
-    for (user of users.docs) {
+    for (var user of users.docs) {
       allUsers[user.id] = user.data();
-    };
+    }
     return allUsers;
   } catch (err) {
     console.log('Error getting documents', err);
   }
-}
+};
 
 exports.getUser = async function(id) {
 
@@ -25,19 +27,18 @@ exports.getUser = async function(id) {
     let allUsers = await exports.getAllUsers();
 
     if (allUsers[id]) {
-      console.log(id)
       return allUsers[id];
     }
   } catch (err) {
-    console.log(err)
-  }}
+    console.log(err);
+  }};
 
 exports.saveUser = async function(id, newUser) {
 
   try {
     let allUsers = await exports.getAllUsers();
     allUsers[id] = newUser;
-    for (name in allUsers) {
+    for (var name in allUsers) {
       let user = allUsers[name];
       let oneUser = await db.collection('users').doc(user.id);
       oneUser.set({
@@ -52,11 +53,10 @@ exports.saveUser = async function(id, newUser) {
     console.log('Error getting documents', err);
   }
 
-}
-
+};
 exports.updateUser = async function(id, userData) {
-  await exports.saveUser(id, userData)
-}
+  await exports.saveUser(id, userData);
+};
 
 exports.deleteUser = async function(id) {
   try{
@@ -65,4 +65,4 @@ exports.deleteUser = async function(id) {
   catch (err){
     console.log(err);
   }
-}
+};

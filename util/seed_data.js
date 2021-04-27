@@ -1,3 +1,5 @@
+/*jshint esversion: 6 */
+
 let fs = require('fs');
 let admin = require("firebase-admin");
 let serviceAccount = require("../config/firebase-config.json");
@@ -9,7 +11,7 @@ let db = admin.firestore();
 let users = JSON.parse(fs.readFileSync('./data/user.json'));
 let blogs = JSON.parse(fs.readFileSync('./data/blog.json'));
 
-for (name in users) {
+for (var name in users) {
   let user = users[name];
   let oneUser = db.collection('users').doc(user.id);
   oneUser.set({
@@ -21,7 +23,7 @@ for (name in users) {
   });
 }
 
-for (name in blogs) {
+for (var name in blogs) {
   let blog = blogs[name];
   let oneBlog = db.collection('blogs').doc(blog.id);
   oneBlog.set({
