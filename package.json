@@ -22,8 +22,7 @@
     "lint2": "./node_modules/jshint/bin/jshint ./util/seed_data.js",
     "lint3": "./node_modules/jshint/bin/jshint ./models/*.js",
 
-    "build": "npm run lint && npm run lint2 && npm run lint3 && npm run compile && npm run build:start",
-    "build:start": "node server.js"
+    "build": "npm run lint && npm run lint2 && npm run lint3 && npm run compile
   },
   "repository": {
     "type": "git",
