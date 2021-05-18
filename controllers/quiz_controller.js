@@ -37,8 +37,8 @@ router.get('/quizzes', async function(req, res) {
 
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
-    res.render('blog/show_blogs.ejs', {
-      blog: blogList
+    res.render('quiz/show_quizzes.ejs', {
+      quiz: quizList
     });
   } catch (error) {
     let errorCode = 404;
@@ -65,7 +65,6 @@ router.get('/about', async function(req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.render("error.ejs", {
       "errorCode": errorCode,
-
     });
   }
 });
@@ -110,28 +109,20 @@ router.get('/avatars', async function(req, res) {
 
 });
 
-router.get('/blog/create', async function(req, res) {
+router.get('/quiz/create', async function(req, res) {
   try {
-    /*
-        let name=req.query.title;
-        console.log(name);
-        name=name.replace(/ /g, '+');
-    */
-    //  request("http://www.omdbapi.com/?apikey="+apikey+"&t="+name+"&r=json", function(err, response, body) {
     if (0 == 0) {
-      //if(!err){
-      //let blogResponse = JSON.parse(body);
-      let blogList = await Blog.getAllBlogs();
+      let quizList = await Quiz.getAllQuizzes();
       let arr = ["Damus", "Mr. Gohde", "Gooboy", "Woash", "Avatar", "Aang", "Katara"];
 
       res.status(200);
       res.setHeader('Content-Type', 'text/html');
-      res.render('blog/new_blog.ejs', {
-        blog: blogList,
+      res.render('quiz/new_quiz.ejs', {
+        quiz: quizList,
         authors: arr
       })
     } else {
-      res.redirect('/blogs');
+      res.redirect('/quizzes');
     }
 
   } catch (error) {
@@ -146,22 +137,22 @@ router.get('/blog/create', async function(req, res) {
 
 });
 
-router.post('/blogs', async function(req, res) {
+router.post('/quizzes', async function(req, res) {
   try {
     let id = req.params.id;
-    let blogResponse = await Blog.getAllBlogs();
-    let newBlog = {
+    let quizResponse = await Quiz.getAllQuizzes();
+    let newQuiz = {
       "id": req.body.id,
-      "name": req.body.name,
+      "author": req.body.author,
       "title": req.body.title,
       "description": req.body.description,
-      "subtitle": req.body.subtitle,
-      "text": req.body.text,
+      "questions": req.body.questions,
+      "answers": req.body.answers,
       "Date": req.body.Date
     }
     let newID = (req.body.id);
-    await Blog.updateBlog(newID, newBlog);
-    res.redirect('/blogs');
+    await Quiz.updateQuiz(newID, newQuiz);
+    res.redirect('/quizzes');
   } catch (error) {
     let errorCode = 404;
     res.status(errorCode);
@@ -172,14 +163,14 @@ router.post('/blogs', async function(req, res) {
   }
 });
 
-router.get('/blog/:id', async function(req, res) {
+router.get('/quiz/:id', async function(req, res) {
   try {
-    let thisBlog = await Blog.getBlog(req.params.id);
-    let blogList = await Blog.getAllBlogs();
+    let thisQuiz = await Quiz.getQuiz(req.params.id);
+    let quizList = await Quiz.getAllQuizzes();
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
-    res.render("blog/blog_details.ejs", {
-      blog: thisBlog
+    res.render("quiz/quiz_details.ejs", {
+      quiz: thisQuiz
     });
 
   } catch (error) {
@@ -193,17 +184,16 @@ router.get('/blog/:id', async function(req, res) {
   }
 });
 
-router.get('/blog/:id/edit', async function(req, res) {
+router.get('/quiz/:id/edit', async function(req, res) {
   try {
-    let thisBlog = await Blog.getBlog(req.params.id);
-    console.log(thisBlog);
-    thisBlog.id = req.params.id;
-    let blogList = await Blog.getAllBlogs();
+    let thisQuiz = await Quiz.getQuiz(req.params.id);
+    thisQuiz.id = req.params.id;
+    let quizList = await Quiz.getAllQuizzes();
 
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
-    res.render("blog/edit_blog.ejs", {
-      blog: thisBlog
+    res.render("blog/edit_quiz.ejs", {
+      quiz: thisQuiz
     });
   } catch (error) {
     let errorCode = 404;
@@ -216,20 +206,20 @@ router.get('/blog/:id/edit', async function(req, res) {
   }
 });
 
-router.put('/blog/:id', async function(req, res) {
+router.put('/quiz/:id', async function(req, res) {
   try {
-    let newBlogData = {};
+    let newQuizData = {};
     let id = req.body.id;
-    newBlogData["id"] = req.body.id;
-    newBlogData["name"] = req.body.name;
-    newBlogData["title"] = req.body.title;
-    newBlogData["description"] = req.body.description;
-    newBlogData["subtitle"] = req.body.subtitle;
-    newBlogData["text"] = req.body.text;
-    newBlogData["Date"] = req.body.Date;
+    newQuizData["id"] = req.body.id;
+    newQuizData["author"] = req.body.author;
+    newQuizData["title"] = req.body.title;
+    newQuizData["description"] = req.body.description;
+    newQuizData["questions"] = req.body.questions;
+    newQuizData["answers"] = req.body.answers;
+    newQuizData["Date"] = req.body.Date;
 
-    await Blog.updateBlog(id, newBlogData);
-    res.redirect('/blogs');
+    await Quiz.updateQuiz(id, newQuizData);
+    res.redirect('/quizzes');
   } catch (error) {
     let errorCode = 404;
     res.status(errorCode);
@@ -241,10 +231,10 @@ router.put('/blog/:id', async function(req, res) {
   }
 });
 
-router.delete('/blog/:id', async function(req, res) {
+router.delete('/quiz/:id', async function(req, res) {
   try {
-    await Blog.deleteBlog(req.params.id);
-    res.redirect('/blogs');
+    await Quiz.deleteQuiz(req.params.id);
+    res.redirect('/quizzes');
   } catch (error) {
     let errorCode = 404;
     res.status(errorCode);
