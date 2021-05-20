@@ -10,7 +10,15 @@ let User = require('../models/user_model')
 let Blog = require('../models/blog_model')
 let apikey = 'f09c17eb';
 
-router.get('/', async function(req, res) {
+function loggedIn(request, response, next) {
+  if (request.user) {
+    next();
+  } else {
+    response.redirect('/login');
+  }
+}
+
+router.get('/', loggedIn, async function(req, res, next) {
   try {
     let blogList = await Blog.getAllBlogs();
     res.status(200);
@@ -23,13 +31,13 @@ router.get('/', async function(req, res) {
     res.status(errorCode);
     res.setHeader('Content-Type', 'text/html');
     res.render("error.ejs", {
+      user: request.user,
       "errorCode": errorCode
-
     });
   }
 });
 
-router.get('/users', async function(req, res) {
+router.get('/users', loggedIn, async function(req, res, next) {
   try {
     let blogList = await Blog.getAllBlogs();
     let userList = await User.getAllUsers();
@@ -37,6 +45,7 @@ router.get('/users', async function(req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render('user/show_users.ejs', {
+      user: request.user,
       users: userList,
       blog: blogList
     });
@@ -51,12 +60,13 @@ router.get('/users', async function(req, res) {
   }
 });
 
-router.get('/about', async function(req, res) {
+router.get('/about', loggedIn, async function(req, res, next) {
   try {
     let blogList = await Blog.getAllBlogs();
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render('about.ejs', {
+      user: request.user,
       blog: blogList
     });
   } catch (error) {
@@ -70,7 +80,7 @@ router.get('/about', async function(req, res) {
   }
 });
 
-router.get('/random', async function(req, res) {
+router.get('/random', loggedIn, async function(req, res, next) {
   fetch('https://last-airbender-api.herokuapp.com/api/v1/characters/random').then((resp) => resp.json()).then(async function(data) {
     //send this data to a new ejs called randomCharacter or something, and then use the form to link to a new page with GET
     let blogList = await Blog.getAllBlogs();
@@ -78,6 +88,7 @@ router.get('/random', async function(req, res) {
     res.setHeader('Content-Type', 'text/html');
     console.log(data);
     res.render('random.ejs', {
+      user: request.user,
       character: data
     });
   }).catch(function(error) {
@@ -92,13 +103,14 @@ router.get('/random', async function(req, res) {
 });
 
 
-router.get('/avatars', async function(req, res) {
+router.get('/avatars', loggedIn, async function(req, res, next) {
   fetch('https://last-airbender-api.herokuapp.com/api/v1/characters/avatar').then((resp) => resp.json()).then(async function(data) {
     //send this data to a new ejs called randomCharacter or something, and then use the form to link to a new page with GET
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     console.log(data[0]);
     res.render('avatars.ejs', {
+      user: request.user,
       avatars: data
     });
   }).catch(function(error) {
@@ -112,23 +124,15 @@ router.get('/avatars', async function(req, res) {
 
 });
 
-router.get('/user/create', async function(req, res) {
+router.get('/user/create', loggedIn, async function(req, res, next) {
   try {
-
-    /*
-        let name=req.query.title;
-        console.log(name);
-        name=name.replace(/ /g, '+');
-    */
-    //  request("http://www.omdbapi.com/?apikey="+apikey+"&t="+name+"&r=json", function(err, response, body) {
     if (0 == 0) {
-      //if(!err){
-      //let blogResponse = JSON.parse(body);
       let arr = ["Damus", "Mr. Gohde", "Gooboy", "Woash", "Avatar", "Aang", "Katara"];
 
       res.status(200);
       res.setHeader('Content-Type', 'text/html');
       res.render('user/new_user.ejs', {
+        user:request.user,
         authors: arr
       })
     } else {
@@ -146,7 +150,7 @@ router.get('/user/create', async function(req, res) {
   }
 });
 
-router.post('/users', async function(req, res) {
+router.post('/users', async function(req, res, next) {
   try{
     let id = req.params.id;
     let blogResponse = await Blog.getAllBlogs();
@@ -171,7 +175,7 @@ router.post('/users', async function(req, res) {
   }
 });
 
-router.get('/user/:id', async function(req, res) {
+router.get('/user/:id', loggedIn, async function(req, res) {
   try {
     let thisUser = await User.getUser(req.params.id);
     console.log(thisUser);
@@ -179,6 +183,7 @@ router.get('/user/:id', async function(req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render("user/user_details.ejs", {
+      user: request.user,
       user: thisUser
     });
 
@@ -193,7 +198,7 @@ router.get('/user/:id', async function(req, res) {
   }
 });
 
-router.get('/user/:id/edit', async function(req, res) {
+router.get('/user/:id/edit', loggedIn, async function(req, res) {
   try {
     let thisUser = await User.getUser(req.params.id);
     console.log(thisUser);
@@ -203,6 +208,7 @@ router.get('/user/:id/edit', async function(req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render("user/edit_user.ejs", {
+      user: request.user,
       user: thisUser
     });
 

@@ -13,10 +13,11 @@ app.use(express.urlencoded());
 app.use(methodOverride('_method'));
 app.use(express.static('public'));
 
+app.use(require('./controllers/auth'));
+app.use(require('./controllers/index'));
 app.use(require('./controllers/user_controller'));
 app.use(require('./controllers/blog_controller'));
 app.use(require('./controllers/quiz_controller'));
-app.use(require('./controllers/auth'));
 
 //default error route in case ofan invalid route
 app.use("", function(request, response) {
