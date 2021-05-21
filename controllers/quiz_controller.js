@@ -203,7 +203,7 @@ router.get('/quiz/:id/edit', loggedIn, async function(req, res) {
 
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
-    res.render("blog/edit_quiz.ejs", {
+    res.render("quiz/edit_quiz.ejs", {
       user: request.user,
       quiz: thisQuiz
     });
