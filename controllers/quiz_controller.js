@@ -12,6 +12,14 @@ let Quiz = require('../models/quiz_model')
 
 let apikey = 'f09c17eb';
 
+function loggedIn(request, response, next) {
+  if (request.user) {
+    next();
+  } else {
+    response.redirect('/login');
+  }
+}
+
 router.get('/', async function(req, res) {
   try {
     let blogList = await Blog.getAllBlogs();
@@ -31,13 +39,14 @@ router.get('/', async function(req, res) {
   }
 });
 
-router.get('/quizzes', async function(req, res) {
+router.get('/quizzes', loggedIn, async function(req, res) {
   try {
     let quizList = await Quiz.getAllQuizzes();
 
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render('quiz/show_quizzes.ejs', {
+      user: request.user,
       quiz: quizList
     });
   } catch (error) {
@@ -109,7 +118,7 @@ router.get('/avatars', async function(req, res) {
 
 });
 
-router.get('/quiz/create', async function(req, res) {
+router.get('/quiz/create', loggedIn, async function(req, res) {
   try {
     if (0 == 0) {
       let quizList = await Quiz.getAllQuizzes();
@@ -118,6 +127,7 @@ router.get('/quiz/create', async function(req, res) {
       res.status(200);
       res.setHeader('Content-Type', 'text/html');
       res.render('quiz/new_quiz.ejs', {
+        user: request.user,
         quiz: quizList,
         authors: arr
       })
@@ -163,13 +173,14 @@ router.post('/quizzes', async function(req, res) {
   }
 });
 
-router.get('/quiz/:id', async function(req, res) {
+router.get('/quiz/:id',loggedIn, async function(req, res) {
   try {
     let thisQuiz = await Quiz.getQuiz(req.params.id);
     let quizList = await Quiz.getAllQuizzes();
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render("quiz/quiz_details.ejs", {
+      user: request.user,
       quiz: thisQuiz
     });
 
@@ -184,7 +195,7 @@ router.get('/quiz/:id', async function(req, res) {
   }
 });
 
-router.get('/quiz/:id/edit', async function(req, res) {
+router.get('/quiz/:id/edit', loggedIn, async function(req, res) {
   try {
     let thisQuiz = await Quiz.getQuiz(req.params.id);
     thisQuiz.id = req.params.id;
@@ -193,6 +204,7 @@ router.get('/quiz/:id/edit', async function(req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render("blog/edit_quiz.ejs", {
+      user: request.user,
       quiz: thisQuiz
     });
   } catch (error) {

@@ -10,6 +10,14 @@ let User = require('../models/user_model')
 let Blog = require('../models/blog_model')
 let apikey = 'f09c17eb';
 
+function loggedIn(request, response, next) {
+  if (request.user) {
+    next();
+  } else {
+    response.redirect('/login');
+  }
+}
+
 router.get('/', async function(req, res) {
   try {
     let blogList = await Blog.getAllBlogs();
@@ -108,23 +116,18 @@ router.get('/avatars', async function(req, res) {
 
 });
 
-router.get('/blog/create', async function(req, res) {
+router.get('/blog/create', loggedIn, async function(req, res) {
   try {
-    /*
-        let name=req.query.title;
-        console.log(name);
-        name=name.replace(/ /g, '+');
-    */
-    //  request("http://www.omdbapi.com/?apikey="+apikey+"&t="+name+"&r=json", function(err, response, body) {
+
     if (0 == 0) {
-      //if(!err){
-      //let blogResponse = JSON.parse(body);
+
       let blogList = await Blog.getAllBlogs();
       let arr = ["Damus", "Mr. Gohde", "Gooboy", "Woash", "Avatar", "Aang", "Katara"];
 
       res.status(200);
       res.setHeader('Content-Type', 'text/html');
       res.render('blog/new_blog.ejs', {
+        user: request.user,
         blog: blogList,
         authors: arr
       })
@@ -191,7 +194,7 @@ router.get('/blog/:id', async function(req, res) {
   }
 });
 
-router.get('/blog/:id/edit', async function(req, res) {
+router.get('/blog/:id/edit', loggedIn, async function(req, res) {
   try {
     let thisBlog = await Blog.getBlog(req.params.id);
     console.log(thisBlog);
@@ -201,6 +204,7 @@ router.get('/blog/:id/edit', async function(req, res) {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
     res.render("blog/edit_blog.ejs", {
+      user: request.user,
       blog: thisBlog
     });
   } catch (error) {
