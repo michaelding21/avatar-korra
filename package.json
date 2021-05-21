@@ -23,7 +23,7 @@
     "compile": "npm run compile:css",
     "lint": "./node_modules/jshint/bin/jshint ./server.js",
     "lint2": "./node_modules/jshint/bin/jshint ./util/seed_data.js",
-    "lint3": "./node_modules/jshint/bin/jshint ./models/*.js",
+    "lint3": "./node_modules/jshint/bin/jshint ./models/*.js"
   },
   "repository": {
     "type": "git",
