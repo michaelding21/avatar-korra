@@ -1,0 +1,20 @@
+<%-include('../partials/header')-%>
+<%-include('../partials/navbar')-%>
+
+
+<h1>Quiz</h1>
+<br>
+<h2>Update <%= quiz.title %></h2>
+
+<form action="/quiz/<%= quiz.id%>?_method=PUT" method="POST">
+<ol>
+<% Object.keys(quiz).forEach(function(key){ %>
+	<li><%=key%>: <input type="text" name="<%=key%>" value="<%= quiz[key] %>">
+	</li>
+<% }); %>
+</ol>
+	<button>Update Quiz</button>
+</form>
+
+
+<%-include('../partials/footer')-%>

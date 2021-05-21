@@ -18,7 +18,6 @@ exports.getAllQuizzes = async function() {
   } catch (err) {
     console.log('Error getting documents', err);
   }
-
 };
 
 exports.getQuiz = async function(id) {
