@@ -1,22 +1,13 @@
-<!doctype html>
-<html>
-
-<head>
-  <title>HighScore- Login</title>
-  <link rel="icon" type="image/png" href="images/logo.png" />
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-  <%-include('partials/navbar', {user:user})-%>
+<%- include('partials/header'); %>
+<%- include('partials/navbar'); %>
   <div class="container">
     <div class="jumbotron text-center text-primary">
-      <h1><span class="fa fa-lock"></span> Login for High Scores</h1>
+      <h1><span class="fa fa-lock"></span> Login to your user account!</h1>
       <p>Login with:
         <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google"></span> Google</a>
       </p>
     </div>
   </div>
-</body>
 
-</html>
+
+<%- include ('partials/footer'); %>
